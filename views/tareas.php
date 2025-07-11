@@ -51,6 +51,10 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
                     <button type="submit">Marcar como completada</button>
                 <?php endif; ?>
             </form>
+            <form method="POST" action="../scripts/delete_task.php" style="display:inline;">
+            <input type="hidden" name="tarea_id" value="<?php echo $tarea["id"]; ?>">
+            <button type="submit" onclick="return confirm('¿Eliminar esta tarea?')">Eliminar</button>
+        </form>
         </li>
         <hr>
     <?php endforeach; ?>

@@ -16,6 +16,6 @@
     <input type="password" name="contraseña" required>
     <button type="submit">Registrarse</button>
 </form>
-
+<a href="../index.php">Ya tienes cuenta</a>
 </body>
 </html>
