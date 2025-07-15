@@ -47,14 +47,15 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
             <?php if ($tarea["fecha_limite"]): ?>
                 <small>Fecha límite: <?php echo $tarea["fecha_limite"]; ?></small>
             <?php endif; ?>
-            <form method="POST" action="../scripts/complete_task.php" style="display:inline;">
-                <input type="hidden" name="tarea_id" value="<?php echo $tarea["id"]; ?>">
-                <?php if ($tarea["completada"]): ?>
-                    <span style="color:green; font-weight:bold;">Completada</span>
-                <?php else: ?>
-                    <button type="submit">Marcar como completada</button>
-                <?php endif; ?>
-            </form>
+            <form method="POST" action="../scripts/toggle_task.php" style="display:inline;">
+    <input type="hidden" name="tarea_id" value="<?php echo $tarea["id"]; ?>">
+    <?php if ($tarea["completada"]): ?>
+        <button type="submit">Desmarcar</button>
+    <?php else: ?>
+        <button type="submit">Marcar como completada</button>
+    <?php endif; ?>
+</form>
+
             <form method="POST" action="../scripts/delete_task.php" style="display:inline;">
             <input type="hidden" name="tarea_id" value="<?php echo $tarea["id"]; ?>">
             <button type="submit" onclick="return confirm('¿Eliminar esta tarea?')">Eliminar</button>
