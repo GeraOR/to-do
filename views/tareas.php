@@ -10,9 +10,19 @@ if (!isset($_SESSION["usuario_id"])) {
 $usuario_id = $_SESSION["usuario_id"];
 
 // Obtener las tareas del usuario
-$sql = "SELECT * FROM tareas WHERE usuario_id = ? ORDER BY fecha_limite IS NULL, fecha_limite";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $usuario_id);
+$estado = isset($_GET["estado"]) ? $_GET["estado"] : null;
+
+if ($estado === "pendiente" || $estado === "completada") {
+    $completada = ($estado === "completada") ? 1 : 0;
+    $sql = "SELECT * FROM tareas WHERE usuario_id = ? AND completada = ? ORDER BY fecha_limite IS NULL, fecha_limite";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $usuario_id, $completada);
+} else {
+    $sql = "SELECT * FROM tareas WHERE usuario_id = ? ORDER BY fecha_limite IS NULL, fecha_limite";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $usuario_id);
+}
+
 $stmt->execute();
 $result = $stmt->get_result();
 $tareas = $result->fetch_all(MYSQLI_ASSOC);
@@ -38,6 +48,15 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
     <p style="color: green;"><?php echo $_SESSION["task_success"]; ?></p>
     <?php unset($_SESSION["task_success"]); ?>
 <?php endif; ?>
+<form method="GET" action="">
+    <label for="filtro_estado">Filtrar por estado:</label>
+    <select name="estado" id="filtro_estado" onchange="this.form.submit()">
+        <option value="">-- Todas --</option>
+        <option value="pendiente" <?= (isset($_GET['estado']) && $_GET['estado'] === 'pendiente') ? 'selected' : '' ?>>Pendientes</option>
+        <option value="completada" <?= (isset($_GET['estado']) && $_GET['estado'] === 'completada') ? 'selected' : '' ?>>Completadas</option>
+    </select>
+</form>
+<br>
 
 <ul>
     <?php foreach ($tareas as $tarea): ?>
