@@ -13,7 +13,7 @@
     <label>Email:</label>
     <input type="email" name="email" required>
     <label>Contraseña:</label>
-    <input type="password" name="contraseña" required>
+    <input type="password" name="contraseña" required minlength="6">
     <button type="submit">Registrarse</button>
 </form>
 <a href="../index.php">Ya tienes cuenta</a>
