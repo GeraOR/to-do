@@ -71,6 +71,9 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
 <br>
 
 <ul>
+    <?php if (empty($tareas)): ?>
+    <p style="text-align:center; color:#777;">No hay tareas para mostrar.</p>
+<?php endif; ?>
     <?php foreach ($tareas as $tarea): ?>
         <li>
             <strong><?php echo htmlspecialchars($tarea["titulo"]); ?></strong>
