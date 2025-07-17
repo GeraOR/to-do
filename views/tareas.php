@@ -34,9 +34,19 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tareas</title>
-    <link rel="stylesheet" href="../styles/tareas.css?v=1.1">
+    <link rel="stylesheet" href="../styles/tareas.css?v=1.2">
 </head>
 <body>
+    <header class="app-header">
+    <div class="logo">
+        <img src="../icons/lista-de-verificacion.png" alt="Logo" />
+        <span>TO DO</span>
+    </div>
+    <a href="../scripts/logout.php" class="logout-btn" title="Cerrar sesión">
+        <img src="../icons/cerrar-sesion.png" alt="Cerrar sesión" />
+    </a>
+</header>
+
     <h2>Tus Tareas</h2>
 
 <!-- Modal para nueva tarea -->
@@ -60,14 +70,15 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
     <p style="color: green;"><?php echo $_SESSION["task_success"]; ?></p>
     <?php unset($_SESSION["task_success"]); ?>
 <?php endif; ?>
-<form method="GET" action="">
+<form method="GET" action="" class="filtro-form">
     <label for="filtro_estado">Filtrar por estado:</label>
     <select name="estado" id="filtro_estado" onchange="this.form.submit()">
-        <option value="">-- Todas --</option>
+        <option value="">Todas</option>
         <option value="pendiente" <?= (isset($_GET['estado']) && $_GET['estado'] === 'pendiente') ? 'selected' : '' ?>>Pendientes</option>
         <option value="completada" <?= (isset($_GET['estado']) && $_GET['estado'] === 'completada') ? 'selected' : '' ?>>Completadas</option>
     </select>
 </form>
+
 <br>
 
 <ul>
@@ -148,9 +159,6 @@ function cerrarFormulario() {
     document.getElementById('modalNuevaTarea').style.display = 'none';
 }
 </script>
-<a href="../scripts/logout.php" class="boton-flotante logout" title="Cerrar sesión">
-    <img src="../icons/cerrar-sesion.png" alt="Cerrar sesión">
-</a>
 <!-- Botón flotante -->
 <button onclick="mostrarFormulario()" class="boton-flotante">+</button>
 

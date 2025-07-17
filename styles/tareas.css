@@ -7,6 +7,7 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
+    padding-top: 70px;
 }
 
 h2 {
@@ -203,4 +204,81 @@ p {
 .boton-flotante:hover img {
     filter: brightness(0.9);
     -webkit-filter: brightness(0.9);
+}
+.filtro-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.filtro-form label {
+    font-weight: bold;
+}
+
+.filtro-form select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.filtro-form select:hover {
+    border-color: #888;
+}
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.app-header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+.app-header .logo img {
+    height: 30px;
+    width: 30px;
+    object-fit: contain;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-top: 0;
+}
+
+.logout-btn img {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: filter 0.3s ease;
+}
+
+
+.logout-btn img:hover {
+    filter: brightness(0.7);
 }
