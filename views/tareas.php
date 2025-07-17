@@ -141,7 +141,10 @@ function cerrarFormulario() {
     document.getElementById('modalNuevaTarea').style.display = 'none';
 }
 </script>
-
+<!-- Botón flotante: Cerrar sesión -->
+<a href="../scripts/logout.php" class="boton-flotante logout" title="Cerrar sesión">
+    🚪
+</a>
 <!-- Botón flotante -->
 <button onclick="mostrarFormulario()" class="boton-flotante">+</button>
 
