@@ -34,7 +34,7 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tareas</title>
-    <link rel="stylesheet" href="../styles/tareas.css">
+    <link rel="stylesheet" href="../styles/tareas.css?v=1.1">
 </head>
 <body>
     <h2>Tus Tareas</h2>
@@ -100,8 +100,6 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
     <?php endforeach; ?>
 </ul>
 
-<a href="../scripts/logout.php">Cerrar sesión</a>
-
 <!-- Modal -->
 <div id="modalEditar" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
     <div style="background:white; padding:20px; max-width:400px; margin:100px auto; border-radius:10px; position:relative;">
@@ -141,9 +139,8 @@ function cerrarFormulario() {
     document.getElementById('modalNuevaTarea').style.display = 'none';
 }
 </script>
-<!-- Botón flotante: Cerrar sesión -->
 <a href="../scripts/logout.php" class="boton-flotante logout" title="Cerrar sesión">
-    🚪
+    <img src="../icons/cerrar-sesion.png" alt="Cerrar sesión">
 </a>
 <!-- Botón flotante -->
 <button onclick="mostrarFormulario()" class="boton-flotante">+</button>
