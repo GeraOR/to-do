@@ -94,10 +94,12 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
             <input type="hidden" name="tarea_id" value="<?php echo $tarea["id"]; ?>">
             <button type="submit" onclick="return confirm('¿Eliminar esta tarea?')">Eliminar</button>
         </form>
-        <button type="button" onclick="abrirModal(<?php echo $tarea['id']; ?>, '<?php echo htmlspecialchars(addslashes($tarea['titulo'])); ?>', '<?php echo htmlspecialchars(addslashes($tarea['descripcion'])); ?>', '<?php echo $tarea['fecha_limite']; ?>')">
-    Editar
-</button>
-
+        <?php
+$titulo_esc = htmlspecialchars(addslashes($tarea['titulo']));
+$descripcion_esc = htmlspecialchars(addslashes(str_replace(["\r", "\n"], ['\r', '\n'], $tarea['descripcion'])));
+?>
+<button type="button" onclick="abrirModal(<?= $tarea['id']; ?>, '<?= $titulo_esc; ?>', '<?= $descripcion_esc; ?>', '<?= $tarea['fecha_limite']; ?>')">
+    Editar</button>
         </li>
         <hr>
     <?php endforeach; ?>
@@ -124,6 +126,10 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
 function abrirModal(id, titulo, descripcion, fecha) {
     document.getElementById('modalTareaId').value = id;
     document.getElementById('modalTitulo').value = titulo;
+    
+    // Reemplazar los caracteres "\r" y "\n" literales por saltos de línea reales
+    descripcion = descripcion.replace(/\\r\\n|\\n|\\r/g, "\n");
+    
     document.getElementById('modalDescripcion').value = descripcion;
     document.getElementById('modalFecha').value = fecha;
     document.getElementById('modalEditar').style.display = 'block';
