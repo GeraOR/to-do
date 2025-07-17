@@ -39,12 +39,23 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
 <body>
     <h2>Tus Tareas</h2>
 
-<form method="POST" action="../scripts/add_task.php">
-    <input type="text" name="titulo" placeholder="Título" required>
-    <textarea name="descripcion" placeholder="Descripción" required></textarea>
-    <input type="date" name="fecha_limite">
-    <button type="submit">Agregar Tarea</button>
-</form>
+<!-- Modal para nueva tarea -->
+<div id="modalNuevaTarea" class="modal">
+    <div style="background:white; padding:20px; max-width:400px; margin:100px auto; border-radius:10px; position:relative;">
+        <button onclick="cerrarFormulario()" style="position:absolute; top:10px; right:10px;">&times;</button>
+        <h3>Agregar Tarea</h3>
+        <form method="POST" action="../scripts/add_task.php">
+            <label>Título:</label>
+            <input type="text" name="titulo" required>
+            <label>Descripción:</label>
+            <textarea name="descripcion" required></textarea>
+            <label>Fecha límite:</label>
+            <input type="date" name="fecha_limite">
+            <button type="submit">Agregar</button>
+        </form>
+    </div>
+</div>
+
 <?php if (isset($_SESSION["task_success"])): ?>
     <p style="color: green;"><?php echo $_SESSION["task_success"]; ?></p>
     <?php unset($_SESSION["task_success"]); ?>
@@ -121,6 +132,18 @@ function cerrarModal() {
     document.getElementById('modalEditar').style.display = 'none';
 }
 </script>
+<script>
+function mostrarFormulario() {
+    document.getElementById('modalNuevaTarea').style.display = 'block';
+}
+
+function cerrarFormulario() {
+    document.getElementById('modalNuevaTarea').style.display = 'none';
+}
+</script>
+
+<!-- Botón flotante -->
+<button onclick="mostrarFormulario()" class="boton-flotante">+</button>
 
 </body>
 </html>
