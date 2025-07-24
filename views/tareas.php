@@ -10,7 +10,7 @@ if (!isset($_SESSION["usuario_id"])) {
 $usuario_id = $_SESSION["usuario_id"];
 
 // Obtener las tareas del usuario
-$estado = isset($_GET["estado"]) ? $_GET["estado"] : null;
+$estado = isset($_GET["estado"]) ? $_GET["estado"] : "pendiente";
 
 if ($estado === "pendiente" || $estado === "completada") {
     $completada = ($estado === "completada") ? 1 : 0;
@@ -73,8 +73,7 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
 <form method="GET" action="" class="filtro-form">
     <label for="filtro_estado">Filtrar por estado:</label>
     <select name="estado" id="filtro_estado" onchange="this.form.submit()">
-        <option value="">Todas</option>
-        <option value="pendiente" <?= (isset($_GET['estado']) && $_GET['estado'] === 'pendiente') ? 'selected' : '' ?>>Pendientes</option>
+<option value="pendiente" <?= (isset($_GET['estado']) && $_GET['estado'] === 'pendiente') ? 'selected' : '' ?>>Pendientes</option>
         <option value="completada" <?= (isset($_GET['estado']) && $_GET['estado'] === 'completada') ? 'selected' : '' ?>>Completadas</option>
     </select>
 </form>
