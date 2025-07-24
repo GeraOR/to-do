@@ -327,6 +327,7 @@ li {
     padding: 20px;
     margin-bottom: 15px;
     box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    position: relative;
 }
 
 li strong {
@@ -381,11 +382,75 @@ li form button:first-child:hover {
     background-color: #45a049;
 }
 
-li button:last-child {
-    background-color: #4CAF50;
-    color: white;
+.menu-container {
+    position: absolute;
+    top: 15px;
+    right: 15px;
 }
 
-li button:last-child:hover {
-    background-color: #45a049;
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #555;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.menu-toggle:hover {
+    background-color: #eee;
+}
+
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    min-width: 160px;
+    z-index: 10;
+    padding: 10px 0;
+}
+
+.menu-dropdown form,
+.menu-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.menu-dropdown button:hover {
+    background-color: #f5f5f5;
+}
+
+/* Mostrar el menú al hacer click */
+.menu-container.active .menu-dropdown {
+    display: block;
+}
+.menu-dropdown {
+    right: 0;      /* ya está */
+    left: auto;    /* fuerza que no se alinee a la izquierda */
+    text-align: left;
+}
+.menu-toggle {
+    top: 10px;
+    right: 10px;
+    padding: 6px;
+    border-radius: 6px;
+    font-size: 18px;
+}
+.menu-dropdown {
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    border: 1px solid #e0e0e0;
 }

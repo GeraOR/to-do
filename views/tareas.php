@@ -92,11 +92,13 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
     <?php if ($tarea["fecha_limite"]): ?>
         <small>Fecha límite: <?= $tarea["fecha_limite"]; ?></small>
     <?php endif; ?>
-    
+    <div class="menu-container">
+        <button class="menu-toggle">⋮</button>
+        <div class="menu-dropdown">
     <form method="POST" action="../scripts/toggle_task.php" style="display:inline;">
         <input type="hidden" name="tarea_id" value="<?= $tarea["id"]; ?>">
         <button type="submit">
-            <?= $tarea["completada"] ? "Desmarcar" : "Marcar como completada"; ?>
+            <?= $tarea["completada"] ? "Desmarcar" : "Completar"; ?>
         </button>
     </form>
 
@@ -111,6 +113,8 @@ $descripcion_esc = htmlspecialchars(addslashes(str_replace(["\r", "\n"], ['\r', 
 ?>
 <button type="button" onclick="abrirModal(<?= $tarea['id']; ?>, '<?= $titulo_esc; ?>', '<?= $descripcion_esc; ?>', '<?= $tarea['fecha_limite']; ?>')">
     Editar</button>
+    </div>
+    </div>
         </li>
         <hr>
     <?php endforeach; ?>
@@ -159,6 +163,28 @@ function cerrarFormulario() {
     document.getElementById('modalNuevaTarea').style.display = 'none';
 }
 </script>
+<script>
+document.querySelectorAll('.menu-toggle').forEach(button => {
+    button.addEventListener('click', e => {
+        e.stopPropagation(); // No propaga el clic
+        const container = button.parentElement;
+        // Cierra otros menús
+        document.querySelectorAll('.menu-container').forEach(el => {
+            if (el !== container) el.classList.remove('active');
+        });
+        // Alterna visibilidad del menú actual
+        container.classList.toggle('active');
+    });
+});
+
+// Cerrar menú al hacer clic fuera
+document.addEventListener('click', () => {
+    document.querySelectorAll('.menu-container').forEach(el => {
+        el.classList.remove('active');
+    });
+});
+</script>
+
 <!-- Botón flotante -->
 <button onclick="mostrarFormulario()" class="boton-flotante">+</button>
 
