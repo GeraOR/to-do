@@ -34,7 +34,7 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tareas</title>
-    <link rel="stylesheet" href="../styles/tareas.css?v=1.2">
+    <link rel="stylesheet" href="../styles/tareas.css?v=1.3">
 </head>
 <body>
     <header class="app-header">
@@ -87,24 +87,24 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
 <?php endif; ?>
     <?php foreach ($tareas as $tarea): ?>
         <li>
-            <strong><?php echo htmlspecialchars($tarea["titulo"]); ?></strong>
-            <p><?php echo htmlspecialchars($tarea["descripcion"]); ?></p>
-            <?php if ($tarea["fecha_limite"]): ?>
-                <small>Fecha límite: <?php echo $tarea["fecha_limite"]; ?></small>
-            <?php endif; ?>
-            <form method="POST" action="../scripts/toggle_task.php" style="display:inline;">
-    <input type="hidden" name="tarea_id" value="<?php echo $tarea["id"]; ?>">
-    <?php if ($tarea["completada"]): ?>
-        <button type="submit">Desmarcar</button>
-    <?php else: ?>
-        <button type="submit">Marcar como completada</button>
+    <strong><?= htmlspecialchars($tarea["titulo"]); ?></strong>
+    <p><?= htmlspecialchars($tarea["descripcion"]); ?></p>
+    <?php if ($tarea["fecha_limite"]): ?>
+        <small>Fecha límite: <?= $tarea["fecha_limite"]; ?></small>
     <?php endif; ?>
-</form>
+    
+    <form method="POST" action="../scripts/toggle_task.php" style="display:inline;">
+        <input type="hidden" name="tarea_id" value="<?= $tarea["id"]; ?>">
+        <button type="submit">
+            <?= $tarea["completada"] ? "Desmarcar" : "Marcar como completada"; ?>
+        </button>
+    </form>
 
-            <form method="POST" action="../scripts/delete_task.php" style="display:inline;">
-            <input type="hidden" name="tarea_id" value="<?php echo $tarea["id"]; ?>">
-            <button type="submit" onclick="return confirm('¿Eliminar esta tarea?')">Eliminar</button>
-        </form>
+    <form method="POST" action="../scripts/delete_task.php" style="display:inline;">
+        <input type="hidden" name="tarea_id" value="<?= $tarea["id"]; ?>">
+        <button onclick="return confirm('¿Eliminar esta tarea?')">Eliminar</button>
+    </form>
+
         <?php
 $titulo_esc = htmlspecialchars(addslashes($tarea['titulo']));
 $descripcion_esc = htmlspecialchars(addslashes(str_replace(["\r", "\n"], ['\r', '\n'], $tarea['descripcion'])));
