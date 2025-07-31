@@ -17,7 +17,12 @@ if ($estado === "pendiente" || $estado === "completada") {
     $sql = "SELECT * FROM tareas WHERE usuario_id = ? AND completada = ? ORDER BY fecha_limite IS NULL, fecha_limite";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $usuario_id, $completada);
-} else {
+} else if ($estado === "importantes") {
+    $sql = "SELECT * FROM tareas WHERE usuario_id = ? AND importante = 1 ORDER BY fecha_limite ASC";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $usuario_id);
+}
+else {
     $sql = "SELECT * FROM tareas WHERE usuario_id = ? ORDER BY fecha_limite IS NULL, fecha_limite";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $usuario_id);
@@ -34,7 +39,7 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tareas</title>
-    <link rel="stylesheet" href="../styles/tareas.css?v=1.5">
+    <link rel="stylesheet" href="../styles/tareas.css?v=1.6">
 </head>
 <body>
     <?php if (isset($_SESSION["task_success"])): ?>
@@ -67,6 +72,11 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
             <textarea name="descripcion" required></textarea>
             <label>Fecha límite:</label>
             <input type="date" name="fecha_limite">
+            <label>
+    <input type="checkbox" name="importante">
+    Marcar como importante ⭐
+</label>
+
             <button type="submit">Agregar</button>
         </form>
     </div>
@@ -81,6 +91,8 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
           <select name="estado" onchange="this.form.submit()">
               <option value="pendiente" <?= (isset($_GET['estado']) && $_GET['estado'] === 'pendiente') ? 'selected' : '' ?>>Pendientes</option>
 <option value="completada" <?= ($estado === 'completada') ? 'selected' : '' ?>>Completadas</option>
+<option value="importantes" <?= $estado === "importantes" ? "selected" : "" ?>>Importantes</option>
+
           </select>
       </form>
       </div>
@@ -89,11 +101,32 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
     <p style="text-align:center; color:#777;">No hay tareas para mostrar.</p>
 <?php endif; ?>
     <?php foreach ($tareas as $tarea): ?>
-        <li>
-    <strong><?= htmlspecialchars($tarea["titulo"]); ?></strong>
+        <?php
+$fecha_limite = $tarea["fecha_limite"];
+$hoy = date("Y-m-d");
+
+$es_completada = $tarea["completada"]; // Asegúrate que sea 0 o 1
+$vencida = false;
+
+if ($fecha_limite && !$es_completada) {
+    $vencida = ($fecha_limite < $hoy);
+}
+?>
+<li class="<?= $tarea["importante"] ? "importante" : "" ?>">
+
+    <strong>
+    <?= htmlspecialchars($tarea["titulo"]) ?>
+    <?php if ($tarea["importante"]): ?>
+        <span style="color: gold;">⭐</span>
+    <?php endif; ?>
+</strong>
+
     <p><?= htmlspecialchars($tarea["descripcion"]); ?></p>
     <?php if ($tarea["fecha_limite"]): ?>
-        <small>Fecha límite: <?= $tarea["fecha_limite"]; ?></small>
+        <small style="color: <?= $vencida ? 'red' : '#888'; ?>">
+    <?= $vencida ? "Vencida: $fecha_limite" : "Fecha límite: $fecha_limite"; ?>
+</small>
+
     <?php endif; ?>
     <div class="menu-container">
         <button class="menu-toggle">⋮</button>
