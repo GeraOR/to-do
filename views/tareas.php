@@ -34,18 +34,24 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tareas</title>
-    <link rel="stylesheet" href="../styles/tareas.css?v=1.4">
+    <link rel="stylesheet" href="../styles/tareas.css?v=1.5">
 </head>
 <body>
+    <?php if (isset($_SESSION["task_success"])): ?>
+    <p style="color: green;"><?php echo $_SESSION["task_success"]; ?></p>
+    <?php unset($_SESSION["task_success"]); ?>
+<?php endif; ?>
+
     <header class="app-header">
-    <div class="logo">
-        <img src="../icons/lista-de-verificacion.png" alt="Logo" />
-        <span>TO DO</span>
-    </div>
-    <a href="../scripts/logout.php" class="logout-btn" title="Cerrar sesión">
-        <img src="../icons/cerrar-sesion.png" alt="Cerrar sesión" />
-    </a>
+  <div class="logo">
+      <img src="../icons/lista-de-verificacion.png" alt="Logo" />
+      <span>TO DO</span>
+  </div>
+      <a href="../scripts/logout.php" class="logout-btn" title="Cerrar sesión">
+          <img src="../icons/cerrar-sesion.png" alt="Cerrar sesión" />
+      </a>
 </header>
+
 
     <h2>Tus Tareas</h2>
 
@@ -70,16 +76,14 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
     <p style="color: green;"><?php echo $_SESSION["task_success"]; ?></p>
     <?php unset($_SESSION["task_success"]); ?>
 <?php endif; ?>
-<form method="GET" action="" class="filtro-form">
-    <label for="filtro_estado">Filtrar por estado:</label>
-    <select name="estado" id="filtro_estado" onchange="this.form.submit()">
-<option value="pendiente" <?= (isset($_GET['estado']) && $_GET['estado'] === 'pendiente') ? 'selected' : '' ?>>Pendientes</option>
-        <option value="completada" <?= (isset($_GET['estado']) && $_GET['estado'] === 'completada') ? 'selected' : '' ?>>Completadas</option>
-    </select>
-</form>
-
-<br>
-
+<div style="display: flex; justify-content: flex-end; margin: 10px 20px;">
+<form method="GET" action="" class="filtro-form-barra">
+          <select name="estado" onchange="this.form.submit()">
+              <option value="pendiente" <?= (isset($_GET['estado']) && $_GET['estado'] === 'pendiente') ? 'selected' : '' ?>>Pendientes</option>
+<option value="completada" <?= ($estado === 'completada') ? 'selected' : '' ?>>Completadas</option>
+          </select>
+      </form>
+      </div>
 <ul>
     <?php if (empty($tareas)): ?>
     <p style="text-align:center; color:#777;">No hay tareas para mostrar.</p>

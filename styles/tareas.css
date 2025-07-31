@@ -16,7 +16,6 @@ h2 {
 }
 
 form {
-    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     max-width: 400px;
@@ -48,271 +47,6 @@ button:hover {
     background-color: #45a049;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-li {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: relative;
-}
-
-li p {
-    margin: 5px 0;
-}
-
-hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 15px 0;
-}
-
-a {
-    display: block;
-    text-align: center;
-    margin-top: 30px;
-    text-decoration: none;
-    color: #333;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-}
-
-.modal > div {
-    background: white;
-    padding: 20px;
-    max-width: 400px;
-    margin: 100px auto;
-    border-radius: 10px;
-    position: relative;
-}
-
-.modal button[type="submit"] {
-    background-color: #4CAF50;
-}
-
-.modal button[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-.modal button[onclick] {
-    background: none;
-    border: none;
-    font-size: 20px;
-    color: #aaa;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-}
-
-p {
-    text-align: center;
-    color: green;
-    font-weight: bold;
-}
-.modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 10;
-}
-.boton-flotante {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border: none;
-    border-radius: 50%;
-    background-color: #4CAF50;
-    color: white;
-    font-size: 30px;
-    line-height: 0;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: background-color 0.3s ease;
-    z-index: 100;
-}
-
-.boton-flotante:hover {
-    background-color: #45a049;
-}
-
-.boton-flotante.add {
-    right: 20px;
-}
-
-.boton-flotante.logout {
-    left: 20px;
-    background-color: #e74c3c;
-}
-
-.boton-flotante.add:hover {
-    background-color: #45a049;
-}
-
-.boton-flotante.logout:hover {
-    background-color: #c0392b;
-}
-.boton-flotante {
-    position: fixed;
-    bottom: 30px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1000;
-}
-
-.boton-flotante.logout {
-    right: 30px;
-}
-
-.boton-flotante img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 50%;
-    transition: filter 0.3s ease; /* ← Agregado */
-}
-.boton-flotante:hover img {
-    filter: brightness(0.9);
-    -webkit-filter: brightness(0.9);
-}
-.filtro-form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-.filtro-form label {
-    font-weight: bold;
-}
-
-.filtro-form select {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    background-color: white;
-    cursor: pointer;
-    transition: border-color 0.3s;
-}
-
-.filtro-form select:hover {
-    border-color: #888;
-}
-.app-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background-color: white;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    z-index: 1000;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.app-header .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: bold;
-    font-size: 18px;
-    color: #333;
-}
-
-.app-header .logo img {
-    height: 30px;
-    width: 30px;
-    object-fit: contain;
-}
-
-.logout-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    margin-top: 0;
-}
-
-.logout-btn img {
-    width: 36px;
-    height: 36px;
-    object-fit: cover;
-    border-radius: 50%;
-    transition: filter 0.3s ease;
-}
-
-
-.logout-btn img:hover {
-    filter: brightness(0.7);
-}
-.filtro-form {
-    background: white;
-    padding: 15px 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    max-width: 300px;
-    margin: 0 auto 30px;
-}
-
-.filtro-form label {
-    font-weight: 600;
-    color: #444;
-}
-
-.filtro-form select {
-    padding: 8px 14px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    transition: 0.2s ease;
-}
-
-.filtro-form select:hover {
-    border-color: #888;
-}
-
-/* Tarjeta de Tarea */
 ul {
     list-style-type: none;
     padding: 0;
@@ -350,11 +84,6 @@ li small {
     margin-bottom: 12px;
 }
 
-li form,
-li button {
-    display: inline-block;
-}
-
 li form button,
 li button {
     margin-right: 8px;
@@ -382,6 +111,129 @@ li form button:first-child:hover {
     background-color: #45a049;
 }
 
+/* Modal genérico */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.modal > div {
+    background: white;
+    padding: 20px;
+    max-width: 400px;
+    margin: 100px auto;
+    border-radius: 10px;
+    position: relative;
+}
+
+.modal button[type="submit"] {
+    background-color: #4CAF50;
+}
+
+.modal button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.modal button[onclick] {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+p {
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}
+
+/* Botón flotante */
+.boton-flotante {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 30px;
+    line-height: 0;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.boton-flotante:hover {
+    background-color: #45a049;
+}
+
+/* Encabezado */
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.app-header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+.app-header .logo img {
+    height: 30px;
+    width: 30px;
+    object-fit: contain;
+}
+
+.logout-btn img {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: filter 0.3s ease;
+}
+
+.logout-btn img:hover {
+    filter: brightness(0.7);
+}
+
+/* Filtro */
+.filtro-form-barra select {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: white;
+    font-size: 14px;
+}
+
+/* Menú contextual */
 .menu-container {
     position: absolute;
     top: 15px;
@@ -391,11 +243,11 @@ li form button:first-child:hover {
 .menu-toggle {
     background: none;
     border: none;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
     color: #555;
-    padding: 5px;
-    border-radius: 4px;
+    padding: 6px;
+    border-radius: 6px;
 }
 
 .menu-toggle:hover {
@@ -407,16 +259,16 @@ li form button:first-child:hover {
     position: absolute;
     top: 30px;
     right: 0;
-    background: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
     border-radius: 8px;
     min-width: 160px;
     z-index: 10;
     padding: 10px 0;
+    text-align: left;
 }
 
-.menu-dropdown form,
 .menu-dropdown button {
     display: block;
     width: 100%;
@@ -426,30 +278,13 @@ li form button:first-child:hover {
     font-size: 14px;
     color: #333;
     cursor: pointer;
+    padding: 8px 16px;
 }
 
 .menu-dropdown button:hover {
     background-color: #f5f5f5;
 }
 
-/* Mostrar el menú al hacer click */
 .menu-container.active .menu-dropdown {
     display: block;
-}
-.menu-dropdown {
-    right: 0;      /* ya está */
-    left: auto;    /* fuerza que no se alinee a la izquierda */
-    text-align: left;
-}
-.menu-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 6px;
-    border-radius: 6px;
-    font-size: 18px;
-}
-.menu-dropdown {
-    background: #fff;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-    border: 1px solid #e0e0e0;
 }

@@ -9,6 +9,7 @@ $stmt->bind_param("ii", $tarea_id, $_SESSION["usuario_id"]);
 $stmt->execute();
 $stmt->close();
 
+$_SESSION["task_success"] = "Tarea eliminada exitosamente."; // <- Mensaje
 header("Location: ../views/tareas.php");
 exit;
 ?>
