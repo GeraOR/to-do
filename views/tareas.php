@@ -39,7 +39,7 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tareas</title>
-    <link rel="stylesheet" href="../styles/tareas.css?v=1.6">
+    <link rel="stylesheet" href="../styles/tareas.css?v=1.7">
 </head>
 <body>
     <?php if (isset($_SESSION["task_success"])): ?>
@@ -66,12 +66,19 @@ $tareas = $result->fetch_all(MYSQLI_ASSOC);
         <button onclick="cerrarFormulario()" style="position:absolute; top:10px; right:10px;">&times;</button>
         <h3>Agregar Tarea</h3>
         <form method="POST" action="../scripts/add_task.php">
-            <label>Título:</label>
+            <label for="titulo">Título:</label>
             <input type="text" name="titulo" required>
-            <label>Descripción:</label>
+            <label for="descripcion">Descripción:</label>
             <textarea name="descripcion" required></textarea>
-            <label>Fecha límite:</label>
-            <input type="date" name="fecha_limite">
+            <label for="fecha_limite">Fecha límite:</label>
+            <input type="date" name="fecha_limite" required>
+            <label for="repeticion">Repetición:</label>
+<select name="repeticion" id="repeticion">
+    <option value="nunca" selected>Nunca</option>
+    <option value="diaria">Diaria</option>
+    <option value="semanal">Semanal</option>
+    <option value="mensual">Mensual</option>
+</select>
             <label>
     <input type="checkbox" name="importante">
     Marcar como importante ⭐
@@ -131,6 +138,10 @@ if ($fecha_limite && !$es_completada) {
         <small style="color: <?= $vencida ? 'red' : '#888'; ?>">
     <?= $vencida ? "Vencida: $fecha_limite" : "Fecha límite: $fecha_limite"; ?>
 </small>
+<?php if ($tarea["repeticion"] !== "nunca"): ?>
+    <small style="color: #888;">⟳ Repetición: <?= ucfirst($tarea["repeticion"]) ?></small>
+<?php endif; ?>
+
 
     <?php endif; ?>
     <div class="menu-container">
