@@ -119,6 +119,11 @@ if ($fecha_limite && !$es_completada) {
     <?php if ($tarea["importante"]): ?>
         <span style="color: gold;">⭐</span>
     <?php endif; ?>
+    <?php if ($tarea["completada"]): ?>
+        <span style="background-color: #4CAF50; color: white; font-size: 12px; padding: 2px 6px; border-radius: 6px; margin-left: 8px;">
+            Completada
+        </span>
+    <?php endif; ?>
 </strong>
 
     <p><?= htmlspecialchars($tarea["descripcion"]); ?></p>
